@@ -23,6 +23,7 @@
               "src/manifest.json"
             ],
             "styles": [
+                "node_modules/bootstrap3/dist/css/bootstrap.min.css",
                 "src/styles/index.scss"
             ],
             "scripts": []

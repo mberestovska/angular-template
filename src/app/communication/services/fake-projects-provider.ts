@@ -13,6 +13,12 @@ export class FakeProjectsProvider extends FakeProvider<IProject> {
         for (let i = 1; i <= 100; i++) {
             this._store[i] = generateProject(i, fakeIssuesProvider);
         }
+      
+    }
+
+    // here is my code
+    generateProjectsList() {
+        return this._store;
     }
 }
 

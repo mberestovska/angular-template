@@ -1,0 +1,17 @@
+<div class="row">
+  <h1>Projects List</h1>
+</div>
+<div class="row">
+  <div class="col-md-5">
+      <app-task-list (projectWasSelected)="selectedProject = $event"></app-task-list>
+  </div>
+  <div class="col-md-7">
+    <app-task-detail *ngIf="selectedProject; else infoText"
+    [project]="selectedProject"></app-task-detail>
+    <ng-template #infoText>
+      <p>Select a project</p>
+    </ng-template>
+  </div>
+</div>
+
+
