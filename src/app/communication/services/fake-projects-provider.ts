@@ -1,10 +1,13 @@
+import { Injectable, EventEmitter } from '@angular/core';
+
 import { FakeProvider } from './fake.provider';
-import { Injectable } from '@angular/core';
 import { IProject } from '../models/project';
 import { FakeIssuesProvider } from './fake-issues-provider';
 
 @Injectable({ providedIn: 'root' })
 export class FakeProjectsProvider extends FakeProvider<IProject> {
+    projectSelected = new EventEmitter<IProject>();
+    // 
     protected _delay = 500;
 
     constructor(private fakeIssuesProvider: FakeIssuesProvider) {
@@ -20,6 +23,12 @@ export class FakeProjectsProvider extends FakeProvider<IProject> {
     generateProjectsList() {
         return this._store;
     }
+
+    getProjectItem(index: number) {
+        return this._store[index];
+    }
+
+    
 }
 
 const NAMES = [

@@ -3,28 +3,26 @@
     <h1>{{ project.name }} : {{ project.id }}</h1>
   </div>
 </div>
-<!-- <div class="row">
-  <div class="col-xs-12">
-    <div class="btn-group" appDropdown>
-      <button type="button" class="btn btn-primary dropdown-toggle">
-        Manage Recipe <span class="caret"></span>
-      </button>
-      <ul class="dropdown-menu">
-        <li><a (click)="onAddToShoppingList()" style="cursor: pointer;">To Shopping List</a></li>
-        <li><a style="cursor: pointer;" (click)="onEditRecipe()">Edit Recipe</a></li>
-        <li><a style="cursor: pointer;" (click)="onDeleteRecipe()">Delete Recipe</a></li>
-      </ul>
-    </div>
+<div class="row">
+  <div class="col-xs-3">
+        <button type="button" class="btn btn-primary">Add Issue</button>
   </div>
-</div> -->
-
+</div>
+<br>
 <div class="row">
   <div class="col-xs-12">
-    <p>Here should be issues</p>
-    <!-- <ul class="list-group">
-      <li class="list-group-item" *ngFor="let issue of project.issues">
-        {{ ingredient.name }} - {{ ingredient.amount }}
+    <ul class="list-group">
+      <li class="list-group-item issue-item" *ngFor="let issue of project.issues; let i = index">
+        {{ issue }}
+        <span class="pull-right">
+            <img src="https://img.icons8.com/office/16/000000/ok.png"
+            (click)="onDone()">
+            <img src="https://img.icons8.com/ios/32/000000/edit.png"
+            (click)="onEdit()">
+            <img src="https://img.icons8.com/flat_round/64/000000/delete-sign.png"
+            (click)="onDelete()">
+        </span>
       </li>
-    </ul> -->
+    </ul>
   </div>
 </div>

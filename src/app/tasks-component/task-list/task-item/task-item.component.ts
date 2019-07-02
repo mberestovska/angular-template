@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 import { IProject } from 'communication';
 
@@ -11,16 +11,11 @@ import { IProject } from 'communication';
 export class TaskItemComponent implements OnInit {
   @Input() project: IProject;
   @Input() index: number;
-
-  @Output() projectSelected = new EventEmitter<void>();
-  
+ 
   constructor() { }
 
   ngOnInit() {
   }
 
-  onSelected() {
-    this.projectSelected.emit();
-    console.log(this.project);
-  }
+
 }

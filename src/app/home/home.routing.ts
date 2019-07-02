@@ -1,5 +1,8 @@
 import { HomeComponent } from './home.component';
 import { Routes, RouterModule } from '@angular/router';
+import { TasksComponent } from 'app/tasks-component/tasks-component.component';
+import { TaskStartComponent } from 'app/tasks-component/task-start/task-start.component';
+import { TaskDetailComponent } from 'app/tasks-component/task-detail/task-detail.component';
 
 const routes: Routes = [
     {
@@ -12,7 +15,12 @@ const routes: Routes = [
                 override: true,
             },
         },
+        children: [
+            { path: '', component: TaskStartComponent},
+            { path: ':id', component: TaskDetailComponent }
+        ]
     },
+
 ];
 
 export const HomeRoutes = RouterModule.forChild(routes);

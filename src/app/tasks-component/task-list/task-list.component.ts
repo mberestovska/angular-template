@@ -1,8 +1,8 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { FakeProjectsProvider } from 'app/communication/services/fake-projects-provider';
 import { FakeIssuesProvider } from 'app/communication/services/fake-issues-provider';
-import { IProject } from 'communication';
+
 
 
 @Component({
@@ -13,7 +13,7 @@ import { IProject } from 'communication';
 export class TaskListComponent implements OnInit {
   projectsArray: any;
   // fPrProv: {};
-  @Output() projectWasSelected = new EventEmitter<IProject>();
+
 
   constructor(private fakeProjectProvider: FakeProjectsProvider,
                private fakeIssuesProvider: FakeIssuesProvider
@@ -27,7 +27,5 @@ export class TaskListComponent implements OnInit {
     console.log(this.projectsArray);
   }
 
-  onProjectSelected(project: IProject) {
-    this.projectWasSelected.emit(project);
-  }
+
 }

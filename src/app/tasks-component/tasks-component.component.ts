@@ -15,10 +15,15 @@ export class TasksComponent implements OnInit {
   selectedProject: IProject;
 
 
-  constructor() { }
+  constructor(private fakeProjectProvider: FakeProjectsProvider) { }
 
   ngOnInit() {
-
+    this.fakeProjectProvider.projectSelected
+      .subscribe(
+        (project: IProject) => {
+          this.selectedProject = project;
+        }
+      );
   }
 
 

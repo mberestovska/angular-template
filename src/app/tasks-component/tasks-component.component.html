@@ -2,15 +2,16 @@
   <h1>Projects List</h1>
 </div>
 <div class="row">
-  <div class="col-md-5">
-      <app-task-list (projectWasSelected)="selectedProject = $event"></app-task-list>
+  <div class="col-xs-5">
+      <app-task-list></app-task-list>
   </div>
-  <div class="col-md-7">
-    <app-task-detail *ngIf="selectedProject; else infoText"
+  <div class="col-xs-7">
+    <!-- <app-task-detail *ngIf="selectedProject"
     [project]="selectedProject"></app-task-detail>
-    <ng-template #infoText>
-      <p>Select a project</p>
-    </ng-template>
+    
+    <app-task-start></app-task-start> -->
+    <router-outlet></router-outlet>
+    
   </div>
 </div>
 
