@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { IProject } from 'communication';
+
 import { FakeProjectsProvider } from 'app/communication/services/fake-projects-provider';
 import { FakeIssuesProvider } from 'app/communication/services/fake-issues-provider';
 
@@ -12,18 +12,12 @@ import { FakeIssuesProvider } from 'app/communication/services/fake-issues-provi
   providers: [FakeProjectsProvider, FakeIssuesProvider]
 })
 export class TasksComponent implements OnInit {
-  selectedProject: IProject;
+  
 
-
-  constructor(private fakeProjectProvider: FakeProjectsProvider) { }
+  constructor() { }
 
   ngOnInit() {
-    this.fakeProjectProvider.projectSelected
-      .subscribe(
-        (project: IProject) => {
-          this.selectedProject = project;
-        }
-      );
+
   }
 
 

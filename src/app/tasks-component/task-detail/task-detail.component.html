@@ -4,23 +4,27 @@
   </div>
 </div>
 <div class="row">
-  <div class="col-xs-3">
-        <button type="button" class="btn btn-primary">Add Issue</button>
-  </div>
+  <form (ngSubmit)="onAddItem(f)" #f="ngForm">
+    <div class="col-xs-3 form-group">
+      <button type="submit" class="btn btn-primary" [disabled]="!f.valid">Add Issue</button>
+    </div>
+    <div class="col-xs-12 form-group">
+      <input type="text" class="form-control" id="issue" name="issue" ngModel required>
+    </div>
+  </form>
 </div>
+
 <br>
 <div class="row">
   <div class="col-xs-12">
     <ul class="list-group">
-      <li class="list-group-item issue-item" *ngFor="let issue of project.issues; let i = index">
+      <li class="list-group-item issue-item" *ngFor="let issue of project.issues; let i = index"
+        [ngClass]="{'issue-done' : IssueDone }">
         {{ issue }}
         <span class="pull-right">
-            <img src="https://img.icons8.com/office/16/000000/ok.png"
-            (click)="onDone()">
-            <img src="https://img.icons8.com/ios/32/000000/edit.png"
-            (click)="onEdit()">
-            <img src="https://img.icons8.com/flat_round/64/000000/delete-sign.png"
-            (click)="onDelete()">
+          <img src="https://img.icons8.com/office/16/000000/ok.png" (click)="onDone(i)">
+          <img src="https://img.icons8.com/ios/32/000000/edit.png" (click)="onEdit(i)">
+          <img src="https://img.icons8.com/flat_round/64/000000/delete-sign.png" (click)="onDelete(i)">
         </span>
       </li>
     </ul>

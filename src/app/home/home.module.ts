@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { HomeRoutes } from './home.routing';
 import { HomeComponent } from './home.component';
+import { FormsModule } from '@angular/forms';
+
 
 import { TasksComponent } from 'app/tasks-component/tasks-component.component';
 import { TaskListComponent } from 'app/tasks-component/task-list/task-list.component';
@@ -12,7 +14,7 @@ import { TaskStartComponent } from 'app/tasks-component/task-start/task-start.co
 
 
 @NgModule({
-    imports: [CommonModule, HomeRoutes, TranslateModule],
+    imports: [CommonModule, HomeRoutes, TranslateModule, FormsModule],
     declarations: [HomeComponent, TasksComponent,  TaskListComponent, TaskItemComponent, TaskDetailComponent, TaskStartComponent],
 })
 export class HomeModule {

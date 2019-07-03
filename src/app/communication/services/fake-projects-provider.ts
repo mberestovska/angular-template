@@ -1,4 +1,4 @@
-import { Injectable, EventEmitter } from '@angular/core';
+import { Injectable } from '@angular/core';
 
 import { FakeProvider } from './fake.provider';
 import { IProject } from '../models/project';
@@ -6,7 +6,7 @@ import { FakeIssuesProvider } from './fake-issues-provider';
 
 @Injectable({ providedIn: 'root' })
 export class FakeProjectsProvider extends FakeProvider<IProject> {
-    projectSelected = new EventEmitter<IProject>();
+    
     // 
     protected _delay = 500;
 

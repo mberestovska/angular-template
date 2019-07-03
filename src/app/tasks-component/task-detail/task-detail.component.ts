@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
+import { NgForm } from '@angular/forms';
 
 import { IProject } from 'communication';
+
 import { FakeProjectsProvider } from 'app/communication/services/fake-projects-provider';
 
 
@@ -13,7 +15,10 @@ import { FakeProjectsProvider } from 'app/communication/services/fake-projects-p
 export class TaskDetailComponent implements OnInit {
   project: IProject;
   id: number;
+  issueDone = false;
+
   // @Input() index: number;
+  
 
   constructor(private fakeProjectProvider: FakeProjectsProvider,
               private route: ActivatedRoute) { }
@@ -27,15 +32,27 @@ export class TaskDetailComponent implements OnInit {
     );
   }
   
-  onDone() {
-    console.log('issue done ');
+  onAddItem(form: NgForm) {
+    const value = form.value;
+    console.log(value);
+    this.project.issues.push(value.issue);
+    form.reset();
   }
 
-  onEdit() {
+  onDone(index: number) {
+    console.log('issue done ' + index);
+    this.issueDone = !this.issueDone;
+    console.log(this.issueDone);
+  }
+
+  onEdit(index: number) {
     console.log('issue edit ' );
   }
 
-  onDelete() {
-    console.log('issue delete ' );
+  onDelete(index: number) {
+    console.log('issue delete ' + index );
+    this.project.issues.splice(index, 1);
   }
+
+
 }
