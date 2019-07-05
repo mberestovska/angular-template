@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { AppModule } from './app.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { StateTransferInitializerModule } from '@nguniversal/common';
+import { IssuesProvider } from 'communication';
+import { FakeIssuesProvider } from './communication/services/fake-issues-provider';
 // import { ServiceWorkerModule } from '@angular/service-worker';
 
 // the Request object only lives on the server
@@ -29,6 +31,7 @@ export function getRequest(): any {
             useFactory: getRequest,
         },
         { provide: 'ORIGIN_URL', useValue: location.origin },
+        { provide: IssuesProvider, useValue: FakeIssuesProvider },
     ],
 })
 export class AppBrowserModule {

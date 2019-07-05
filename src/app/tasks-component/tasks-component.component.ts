@@ -13,16 +13,17 @@ export class TasksComponent implements OnInit, OnDestroy {
   projectsArray: any;
   subscription: Subscription;
 
-  constructor(private projectProvider: ProjectsProvider,
-    private issueProvider: IssuesProvider) { }
+  constructor(private projectProvider: ProjectsProvider
+    // private issueProvider: IssuesProvider
+    ) { }
 
   ngOnInit() {
-    this.projectsArray = this.projectProvider.getItems().subscribe(
-      (projects: IProject[]) => {
-        this.projectsArray = projects;
-        console.log(this.projectsArray);
-      }
-    );
+    // this.projectsArray = this.projectProvider.getItems().subscribe(
+    //   (projects: IProject[]) => {
+    //     this.projectsArray = projects;
+    //     console.log(this.projectsArray);
+    //   }
+    // );
 
   }
 

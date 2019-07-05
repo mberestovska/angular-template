@@ -12,18 +12,19 @@ import { IProject, ProjectsProvider, IssuesProvider, IIssue } from 'communicatio
 
 export class TaskListComponent implements OnInit, OnDestroy {
    // @Input()
-    projectsArray: any;
-  project: IProject;
+  projectsArray: any;
+  // project: IProject;
   issues: IIssue[];
   subscription: Subscription;
   objectKeys: any;
 
-  constructor(private projectProvider: ProjectsProvider,
-              private issueProvider: IssuesProvider) { }
+  constructor(private projectProvider: ProjectsProvider
+              // private issueProvider: IssuesProvider
+              ) { }
 
   ngOnInit() {
     this.projectsArray = this.projectProvider.getItems().subscribe(
-      (projects) => {
+      (projects: IProject[]) => {
         this.projectsArray = projects;
         // this.objectKeys = Object.keys(this.projectsArray);
         // console.log(this.objectKeys);

@@ -16,33 +16,44 @@ import { FakeProjectsProvider } from 'app/communication/services/fake-projects-p
 })
 
 export class TaskDetailComponent implements OnInit, OnDestroy {
-    @Input() projectsArray: any;
-    project: any;
+    projectsArray: any;
+    @Input() project: any;
     id: number;
     issueDone = false;
     subscription: Subscription;
+    projectSelected = this.id + 1;
 
  
     constructor(private projectProvider: ProjectsProvider,
-        private issueProvider: IssuesProvider,
-        private route: ActivatedRoute,
-        private fakeProjectProvider: FakeProjectsProvider) { }
+                // private issueProvider: IssuesProvider,
+                private route: ActivatedRoute
+                ) { }
 
 
     ngOnInit() {
-        this.route.params
-            .subscribe(
-                (params: Params) => {
-                    // console.log('params id ' + params.id);
-                    const id = +params['id'];
-                    console.log('id ' + id);
-                    // this line returns an Observable
-                    // this.project = this.projectProvider.getItemById('id');
-                    // this line returns a project 
-                    this.project = this.fakeProjectProvider.getProjectItem(id);
-                    console.log(this.project);
+            this.projectProvider.getItems().subscribe(
+                (projects: IProject[]) => {
+                    this.projectsArray = projects;
+                    console.log('projects' + this.projectsArray);
                 }
             );
+
+            this.route.params
+            .subscribe(
+                (params: Params) => {
+                    console.log('params ' + params);
+                    const id = +params['id'];
+                    console.log('id ' + id);
+                    // console.log('initial array ' + this.projectsArray);
+                    // this line returns an Observable
+                    this.project = this.projectsArray[id];
+                    console.log('project' + this.project);
+
+                }
+            );
+
+           
+
     }
 
     //   onAddItem(form: NgForm) {
@@ -66,7 +77,7 @@ export class TaskDetailComponent implements OnInit, OnDestroy {
     //     console.log('issue delete ' + index );
     //     this.project.issues.splice(index, 1);
     //   }
-    
+
     ngOnDestroy() {
         this.subscription.unsubscribe();
     }
