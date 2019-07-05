@@ -1,24 +1,32 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 
-
-import { FakeProjectsProvider } from 'app/communication/services/fake-projects-provider';
-import { FakeIssuesProvider } from 'app/communication/services/fake-issues-provider';
+import { IProject, IssuesProvider, ProjectsProvider } from 'communication';
 
 
 @Component({
   selector: 'app-tasks-component',
   templateUrl: './tasks-component.component.html',
   styleUrls: ['./tasks-component.component.scss'],
-  providers: [FakeProjectsProvider, FakeIssuesProvider]
 })
-export class TasksComponent implements OnInit {
-  
+export class TasksComponent implements OnInit, OnDestroy {
+  projectsArray: any;
+  subscription: Subscription;
 
-  constructor() { }
+  constructor(private projectProvider: ProjectsProvider,
+    private issueProvider: IssuesProvider) { }
 
   ngOnInit() {
+    this.projectsArray = this.projectProvider.getItems().subscribe(
+      (projects: IProject[]) => {
+        this.projectsArray = projects;
+        console.log(this.projectsArray);
+      }
+    );
 
   }
 
-
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
 }

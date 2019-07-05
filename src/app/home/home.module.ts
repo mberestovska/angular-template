@@ -11,11 +11,18 @@ import { TaskListComponent } from 'app/tasks-component/task-list/task-list.compo
 import { TaskItemComponent } from 'app/tasks-component/task-list/task-item/task-item.component';
 import { TaskDetailComponent } from 'app/tasks-component/task-detail/task-detail.component';
 import { TaskStartComponent } from 'app/tasks-component/task-start/task-start.component';
+import { CommunicationModule } from 'communication';
 
 
 @NgModule({
-    imports: [CommonModule, HomeRoutes, TranslateModule, FormsModule],
-    declarations: [HomeComponent, TasksComponent,  TaskListComponent, TaskItemComponent, TaskDetailComponent, TaskStartComponent],
+    imports: [CommonModule, HomeRoutes, TranslateModule, FormsModule, CommunicationModule],
+    declarations: [HomeComponent,
+        TasksComponent,
+        TaskListComponent,
+        TaskItemComponent, 
+        TaskDetailComponent, 
+        TaskStartComponent],
+    
 })
 export class HomeModule {
 }

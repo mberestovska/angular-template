@@ -11,10 +11,11 @@ import { IProject } from 'communication';
 export class TaskItemComponent implements OnInit {
   @Input() project: IProject;
   @Input() index: number;
- 
+  
   constructor() { }
 
   ngOnInit() {
+    
   }
 
 

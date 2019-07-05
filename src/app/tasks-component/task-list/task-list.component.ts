@@ -1,10 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
-
-import { FakeProjectsProvider } from 'app/communication/services/fake-projects-provider';
-import { FakeIssuesProvider } from 'app/communication/services/fake-issues-provider';
-import { IProject } from 'communication';
-
+import { Subscription } from 'rxjs';
+import { IProject, ProjectsProvider, IssuesProvider, IIssue } from 'communication';
 
 
 @Component({
@@ -12,43 +9,50 @@ import { IProject } from 'communication';
   templateUrl: './task-list.component.html',
   styleUrls: ['./task-list.component.scss']
 })
-export class TaskListComponent implements OnInit {
-  projectsArray: any;
-  project: IProject = {
-    id: +'',
-    name: '',
-    issues: []
-  };
-  // fPrProv: {};
 
+export class TaskListComponent implements OnInit, OnDestroy {
+   // @Input()
+    projectsArray: any;
+  project: IProject;
+  issues: IIssue[];
+  subscription: Subscription;
+  objectKeys: any;
 
-  constructor(private fakeProjectProvider: FakeProjectsProvider,
-               private fakeIssuesProvider: FakeIssuesProvider
-              ) { }
+  constructor(private projectProvider: ProjectsProvider,
+              private issueProvider: IssuesProvider) { }
 
   ngOnInit() {
-    const fPrProv = this.fakeProjectProvider.generateProjectsList();
-     const fIsProv = this.fakeIssuesProvider.generateIssues(3);
-     console.log('issues: ' + fIsProv);
-    this.projectsArray = Object.values(fPrProv); 
-    console.log(this.projectsArray);
+    this.projectsArray = this.projectProvider.getItems().subscribe(
+      (projects) => {
+        this.projectsArray = projects;
+        // this.objectKeys = Object.keys(this.projectsArray);
+        // console.log(this.objectKeys);
+        // console.log(typeof this.objectKeys);
+        console.log('array from list comp' + this.projectsArray);
+      }
+    );
+   
   }
 
-  onAddProject(form: NgForm) {
-    const value = form.value;
-    console.log('val ' + value.name + '  ' + value.issue);
-    this.project.id = this.projectsArray[this.projectsArray.length - 1]['id'] + 1 ;
-    this.project.name = value.name;
-    this.project.issues = value.issue;
-    console.log('pr' + this.project.id + '  ' + this.project.name + '  ' + this.project.issues);
-    this.projectsArray.push(this.project);
-
-    form.reset();
-  }
-  // onAddItem(form: NgForm) {
+  // onAddProject(form: NgForm) {
   //   const value = form.value;
-  //   console.log(value);
-  //   this.project.issues.push(value.issue);
+  //   console.log('val ' + value.name + '  ' + value.issue);
+  //   this.project.id = this.projectsArray[this.projectsArray.length - 1]['id'] + 1;
+  //   this.project.name = value.name;
+  //   this.project.issues = value.issue;
+  //   console.log('pr' + this.project.id + '  ' + this.project.name + '  ' + this.project.issues);
+  //   this.projectsArray.push(this.project);
+
   //   form.reset();
   // }
+  // // onAddItem(form: NgForm) {
+  // //   const value = form.value;
+  // //   console.log(value);
+  // //   this.project.issues.push(value.issue);
+  // //   form.reset();
+  // // }
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
 }
