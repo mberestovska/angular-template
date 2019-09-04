@@ -14,6 +14,8 @@ import { Translate } from './translate/translate';
 import { Meta } from 'meta';
 import { ConfigModule } from 'config';
 import { AppConfig } from './app.config';
+import { APP_BASE_HREF, Location } from '@angular/common';
+import {  getBaseUrl } from './base-href.provider';
 
 export function initLanguage(translateService: TranslateService): Function {
     return (): Promise<any> => translateService.initLanguage();
@@ -48,6 +50,12 @@ export function initLanguage(translateService: TranslateService): Function {
             multi: true,
             deps: [TranslateService],
         },
+        {
+            provide: APP_BASE_HREF,
+            useFactory: getBaseUrl
+           // useValue: 'home',
+           // useValue: '/' + (window.location.pathname.split('/')[1] || '')
+        }
     ],
 })
 export class AppModule {
