@@ -6,6 +6,7 @@ export interface AuthenticationConfig {
     redirect: string;
 }
 
+
 export class AppConfig extends Config implements CommunicationConfig {
     version: number;
     http: HttpConfig;

@@ -7,12 +7,16 @@ import { MatFormFieldModule } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material';
 import { MatCardModule } from '@angular/material/card';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { NewPasswordComponent } from './new-password/new-password.component';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
     declarations: [
         LoginComponent,
         RegisterComponent,
+        ForgotPasswordComponent,
+        NewPasswordComponent,
     ],
     imports: [
         CommonModule,
@@ -22,7 +26,6 @@ import { HttpClientModule } from '@angular/common/http';
         FormsModule,
         ReactiveFormsModule,
         MatCardModule,
-
         HttpClientModule,
     ],
 })

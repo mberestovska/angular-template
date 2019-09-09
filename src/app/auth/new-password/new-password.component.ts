@@ -1,22 +1,17 @@
 import { Component } from '@angular/core';
-import { FormComponent } from '../form.component';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MustMatch } from '../password.validator';
+import { FormComponent } from '../form.component';
 import { Observable, of } from 'rxjs';
 
 @Component({
-    selector: 'app-register',
-    templateUrl: './register.component.html',
+    selector: 'app-new-password',
+    templateUrl: './new-password.component.html',
     styleUrls: ['../auth.scss'],
 })
-export class RegisterComponent extends FormComponent {
+export class NewPasswordComponent extends FormComponent {
 
     protected errorsMessages = {
-        username: {
-            required: 'Username is required',
-            minlength: 'Username must have minimum 3 symbols',
-            maxlength: 'Username must have maximum 50 symbols',
-        },
         password: {
             required: 'Password is required',
             minlength: 'Password must have minimum 3 symbols',
@@ -28,18 +23,8 @@ export class RegisterComponent extends FormComponent {
         },
     };
 
-    protected submitRequest(): Observable<any> {
-        return of(true);
-    }
-
-
     protected createForm(): FormGroup {
         return this.formBuilder.group({
-            username: new FormControl(null, [
-                Validators.required,
-                Validators.minLength(3),
-                Validators.maxLength(50),
-            ]),
             password: new FormControl(null, [
                 Validators.required,
                 Validators.minLength(3),
@@ -47,5 +32,15 @@ export class RegisterComponent extends FormComponent {
             ]),
             passwordConfirm: new FormControl(null, Validators.required),
         }, { validator: MustMatch('password', 'passwordConfirm') });
+    }
+
+    protected submitRequest(): Observable<any> {
+        return of(this.form.value);
+    }
+
+    protected _handleSuccessSubmit() {
+        if (this.form.valid) {
+            console.log('send email to this address ->', this.form.value.password);
+        }
     }
 }
